@@ -1,9 +1,12 @@
+import { AppShell } from "@mantine/core";
+import { Header } from "../header/header";
 
 function App() {
   return (
-    <div className="App">
-      <p>This is the core of the application</p>
-    </div>
+   <AppShell
+    header={<Header />}
+   > 
+   </AppShell>
   );
 }
 
