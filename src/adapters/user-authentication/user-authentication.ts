@@ -10,7 +10,8 @@ interface IUser {
     uid: string,
     username: string,
     email: string,
-    password: string
+    authProvider?: string,
+    password?: string
 
 }
 
@@ -63,12 +64,12 @@ export class UserAuthentication {
             const q = query(collection(this.db, 'users'), where("uid", "==", user.uid))
             const docs = await getDocs(q);
             if (docs.docs.length === 0) {
-                await addDoc(collection(this.db, "users"), {
+                await this.addUserToDatabase({
                     uid: user.uid,
-                    name: user.displayName,
+                    username: user.displayName!,
                     authProvider: "google",
-                    email: user.email,
-                });
+                    email: user.email!
+            })
             }
         } catch (Err) {
             console.log(Err)
