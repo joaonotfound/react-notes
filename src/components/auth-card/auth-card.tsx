@@ -11,8 +11,15 @@ export const AuthCard = () => {
     <Card withBorder
       radius="sm"
       p='xl'
+      shadow="sm"
+      style={{
+        minWidth: 400
+      }}
+
     >
-      <Text size='xl' mb="md" weight={700}>Welcome!</Text>
+      <Text size='xl' mb="md" weight={700}>{
+        type == "register" ? "Welcome!" : "Welcome back!"
+      }</Text>
 
       <Group grow mb='md'>
         <Button variant="default" radius='lg' leftIcon={<FcGoogle />} onClick={() => userAuth.signInWithGoogle()}> Sign in with google </Button>
@@ -22,13 +29,13 @@ export const AuthCard = () => {
 
       <form onSubmit={() => { }}>
         {type === 'register' && (
-          <TextInput required label="Username" placeholder="@username" />
+          <TextInput required label="Username" placeholder="username" />
         )}
-        <TextInput required label="Email" rightSection={<MdAlternateEmail />} placeholder="email" />
+        <TextInput required label="Email" rightSection={<MdAlternateEmail />} placeholder="your-email@email.com" />
         <PasswordInput required label='Password' placeholder="password" />
 
         <Group position="apart" mt='xl'>
-          <Anchor size='sm' onClick={() => toggleType()}>
+          <Anchor size='xs' onClick={() => toggleType()}>
             {type === 'login' ? "Don't have an account yet?" : "Already have an account?"}
           </Anchor>
           <Button type="submit">  {type === 'login' ? "Login" : "Sign up"}</Button>
