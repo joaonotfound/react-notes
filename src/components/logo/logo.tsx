@@ -1,5 +1,5 @@
-
+import { BiNotepad } from 'react-icons/bi'
 
 export const Logo = () => {
-    return <h1>L</h1>
+    return <BiNotepad size={24} ></BiNotepad>
 }
