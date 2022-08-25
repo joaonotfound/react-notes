@@ -1,5 +1,5 @@
 import firebaseSettings from './firebase-settings.json'
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
 import { getFirestore, query, where, collection, getDocs, addDoc } from 'firebase/firestore'
 
@@ -7,7 +7,15 @@ export class UserAuthentication {
     private readonly app = initializeApp(firebaseSettings)
     private readonly auth = getAuth(this.app)
     private readonly db = getFirestore(this.app)
-
+    async signInWithEmailAndPassword(email: string, password: string){
+        console.log("loggin with email and password")
+        try {
+            const res = await signInWithEmailAndPassword(this.auth, email, password)
+            console.log('successfully logged.')
+        }catch(err){
+            console.log(err)
+        }
+    }
     async signInWithGoogle() {
         try {
             const googleProvider = new GoogleAuthProvider();
