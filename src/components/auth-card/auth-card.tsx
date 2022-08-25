@@ -8,6 +8,7 @@ import { MdAlternateEmail } from 'react-icons/md'
 export const AuthCard = () => {
   const userAuth = new UserAuthentication()
   const [type, toggleType] = useToggle(['login', 'register']);
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return <>
@@ -32,7 +33,10 @@ export const AuthCard = () => {
 
       <form onSubmit={() => { }}>
         {type === 'register' && (
-          <TextInput required label="Username" placeholder="username" />
+          <TextInput required label="Username"
+           placeholder="username" 
+           onChange={(e) => setUsername(e.target.value)}
+           />
         )}
         <TextInput required label="Email"
           rightSection={<MdAlternateEmail />}
@@ -51,11 +55,10 @@ export const AuthCard = () => {
           </Anchor>
           <Button onClick={
             type === 'register' 
-            ? () => {} :
+            ? () => userAuth.createUserWithEmailAndPassword(username, email, password) :
           () => userAuth.signInWithEmailAndPassword(email, password)
           }>  {type === 'login' ? "Login" : "Sign up"}</Button>
         </Group >
-
       </form >
     </Card >
   </>
