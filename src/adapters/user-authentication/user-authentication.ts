@@ -24,8 +24,7 @@ export class UserAuthentication {
         await addDoc(collection(this.db, 'users'), {
             uid: user.uid,
             username: user.username,
-            email: user.email,
-            password: user.password
+            email: user.email
         });
     }
     async createUserWithEmailAndPassword(username: string, email: string, password: string){
@@ -38,7 +37,6 @@ export class UserAuthentication {
                 await this.addUserToDatabase({
                     uid: user.uid,
                     username: username,
-                    password: password,
                     email: email
                 })
             }
