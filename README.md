@@ -1,5 +1,10 @@
 # Notes application
 
-My notes application
+A free and open-source notes website application made using Firebase.
 
-you may checkout the sites here: [mywebsite](https://joaonotfound.ddns.net) (not the latest version)
+It's purpouse is to be a simple alternative to the obsidian and notion. 
+
+you may checkout the sites here: [notes](https://joaonotfound.ddns.net) (not the latest version)
+
+I still didn't decide it's name and either its logo.
+
