@@ -10,9 +10,6 @@ export const Store = configureStore({
     }
 })
 
-console.log(AuthStore)
-console.log(Store)
-
 type RootState = ReturnType<typeof Store.getState>
 type AppDispatch = typeof Store.dispatch
 
