@@ -6,5 +6,12 @@ It's purpouse is to be a simple alternative to the obsidian and notion.
 
 you may checkout the sites here: [notes](https://joaonotfound.ddns.net) (not the latest version)
 
-I still didn't decide it's name and either its logo.
+I still didn't decide its name and either its logo.
 
+# How to run
+ 
+
+Execute: 
+```
+npm run install && npm run start
+```
