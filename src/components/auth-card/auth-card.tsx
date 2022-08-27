@@ -42,7 +42,8 @@ export const AuthCard: FC<IProps> = (props) => {
         return null
     }
   }
-  const handleSubmitButton = () => {
+  const handleSubmitButton = (e: any) => {
+    e.preventDefault?.()
     if (type === "register") {
       userAuth.createUserWithEmailAndPassword(username, email, password)
     } else {
