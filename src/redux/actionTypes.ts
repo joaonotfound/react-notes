@@ -1,9 +1,6 @@
-
-export interface IUser {
-    name: string
-}
+import { User } from "interfaces/user-interface";
 
 export interface IAuth {
     isAuthenticated: boolean,
-    user?: IUser
+    user?: User
 }

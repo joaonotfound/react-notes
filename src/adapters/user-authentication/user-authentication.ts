@@ -65,17 +65,17 @@ export class UserAuthentication {
             let user = res.user
             const q = query(collection(this.db, 'users'), where("uid", "==", user.uid))
             const docs = await getDocs(q);
-            if (docs.docs.length === 0) {
-                const new_user = {
-                    uid: user.uid,
-                    username: user.displayName!,
-                    authProvider: "google",
-                    email: user.email!
-                }
-                await this.addUserToDatabase(new_user)
-                return Promise.resolve(new_user)
+            const app_user: User = {
+                uid: user.uid,
+                username: user.displayName != null ? user.displayName : "NOUSER",
+                authProvider: "google",
+                email: user.email!
             }
-            return Promise.resolve(user)
+            if (docs.docs.length === 0) {
+                await this.addUserToDatabase(app_user)
+                return Promise.resolve(app_user)
+            }
+            return Promise.resolve(app_user)
         } catch (err) {
             return Promise.reject(err)
         }
