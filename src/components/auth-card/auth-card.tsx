@@ -22,7 +22,7 @@ export const AuthCard = () => {
 
     >
       <Text size='xl' mb="md" weight={700}>{
-        type == "register" ? "Welcome!" : "Welcome back!"
+        type === "register" ? "Welcome!" : "Welcome back!"
       }</Text>
 
       <Group grow mb='md'>
@@ -34,9 +34,9 @@ export const AuthCard = () => {
       <form onSubmit={() => { }}>
         {type === 'register' && (
           <TextInput required label="Username"
-           placeholder="username" 
-           onChange={(e) => setUsername(e.target.value)}
-           />
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
         )}
         <TextInput required label="Email"
           rightSection={<MdAlternateEmail />}
@@ -54,9 +54,9 @@ export const AuthCard = () => {
             {type === 'login' ? "Don't have an account yet?" : "Already have an account?"}
           </Anchor>
           <Button onClick={
-            type === 'register' 
-            ? () => userAuth.createUserWithEmailAndPassword(username, email, password) :
-          () => userAuth.signInWithEmailAndPassword(email, password)
+            type === 'register'
+              ? () => userAuth.createUserWithEmailAndPassword(username, email, password) :
+              () => userAuth.signInWithEmailAndPassword(email, password)
           }>  {type === 'login' ? "Login" : "Sign up"}</Button>
         </Group >
       </form >
