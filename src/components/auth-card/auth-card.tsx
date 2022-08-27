@@ -29,7 +29,11 @@ export const AuthCard: FC<IProps> = (props) => {
       })
     }
   }
-
+  const signUpWithGoogle = () => {
+    userAuth.signInWithGoogle().then(user => {
+      props.onAuthentication?.(user!)
+    })
+  }
   return <>
     <Card withBorder
       radius="sm"
@@ -43,9 +47,8 @@ export const AuthCard: FC<IProps> = (props) => {
       <Text size='xl' mb="md" weight={700}>{
         type === "register" ? "Welcome!" : "Welcome back!"
       }</Text>
-
       <Group grow mb='md'>
-        <Button variant="default" radius='lg' leftIcon={<FcGoogle />} onClick={() => userAuth.signInWithGoogle()}> Sign in with google </Button>
+        <Button variant="default" radius='lg' leftIcon={<FcGoogle />} onClick={signUpWithGoogle}> Sign in with google </Button>
       </Group>
 
       <Divider labelPosition="center" my='sm' label="or sign with email"></Divider>
