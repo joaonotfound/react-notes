@@ -18,7 +18,7 @@ export const HomePage = () => {
       <Text size="md">It's a free and open-source project intended to be a simple alternative to the notion and obsidian app</Text>
       <Text py="xs"> It's focused on privacy and secury despite it isn't anyhow secure so far. </Text>
       <Text size="sm" mt="md">You might want to checkout the repository here:  <Anchor<'a'> italic size="sm" href={repositroyUrl}>Gitlab repository</Anchor></Text>
-      <Text size="sm"> It's currently beign developer only by me {<Anchor<'a'> italic href={gitlabUrl}>@joaonotfound</Anchor>}</Text>
+      <Text size="sm"> It's currently being developed only by me {<Anchor<'a'> italic href={gitlabUrl}>@joaonotfound</Anchor>}</Text>
 
       <Group position="apart" pt="xl">
         <Group>
