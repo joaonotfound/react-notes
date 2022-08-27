@@ -1,16 +1,35 @@
 import { Card, PasswordInput, Text, TextInput, Button, Group, Anchor, Divider } from "@mantine/core"
 import { useToggle } from "@mantine/hooks"
 import { UserAuthentication } from "adapters"
-import { useState } from "react"
+import { User } from "interfaces/user-interface"
+import { useState, FC } from "react"
 import { FcGoogle } from 'react-icons/fc'
 import { MdAlternateEmail } from 'react-icons/md'
 
-export const AuthCard = () => {
+interface IProps {
+  onAuthentication?: (user: User) => void
+}
+
+export const AuthCard: FC<IProps> = (props) => {
   const userAuth = new UserAuthentication()
+
   const [type, toggleType] = useToggle(['login', 'register']);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleSubmitButton = () => {
+    if (type === 'register') {
+      userAuth.createUserWithEmailAndPassword(username, email, password).then(user => {
+        props.onAuthentication?.(user!)
+      })
+    } else {
+      userAuth.signInWithEmailAndPassword(email, password).then(user => {
+        props.onAuthentication?.(user!)
+      })
+    }
+  }
+
   return <>
     <Card withBorder
       radius="sm"
@@ -53,11 +72,7 @@ export const AuthCard = () => {
           <Anchor size='xs' onClick={() => toggleType()}>
             {type === 'login' ? "Don't have an account yet?" : "Already have an account?"}
           </Anchor>
-          <Button onClick={
-            type === 'register'
-              ? () => userAuth.createUserWithEmailAndPassword(username, email, password) :
-              () => userAuth.signInWithEmailAndPassword(email, password)
-          }>  {type === 'login' ? "Login" : "Sign up"}</Button>
+          <Button onClick={handleSubmitButton}>  {type === 'login' ? "Login" : "Sign up"}</Button>
         </Group >
       </form >
     </Card >
