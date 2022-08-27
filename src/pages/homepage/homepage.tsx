@@ -29,7 +29,7 @@ export const HomePage = () => {
             <BrandGitlab />
           </Anchor>
         </Group>
-        <Button onClick={() => { navigate('/login') }}>Sign</Button>
+        <Button onClick={() => { navigate('/login') }}>Sign in</Button>
       </Group>
     </Card>
   </Center >
