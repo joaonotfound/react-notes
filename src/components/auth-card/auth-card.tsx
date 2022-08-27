@@ -1,4 +1,4 @@
-import { Card, PasswordInput, Text, TextInput, Button, Group, Anchor, Divider } from "@mantine/core"
+import { Card, Box, Center, PasswordInput, Text, TextInput, Button, Group, Anchor, Divider } from "@mantine/core"
 import { useToggle } from "@mantine/hooks"
 import { UserAuthentication } from "adapters"
 import { User } from "interfaces/user-interface"
@@ -6,7 +6,7 @@ import { useState, FC } from "react"
 import { FcGoogle } from 'react-icons/fc'
 import { MdAlternateEmail } from 'react-icons/md'
 import { AuthErrorsCodes } from "adapters"
-
+import { IconArrowLeft } from '@tabler/icons'
 interface IProps {
   onAuthentication?: (user: User) => void
 }
@@ -60,7 +60,7 @@ export const AuthCard: FC<IProps> = (props) => {
 
     >
       <Text size='xl' mb="md" weight={700}>{
-        type === "register" ? "Welcome!" : "Welcome back!"
+        type === "register" ? "Create your account!" : "Welcome back!"
       }</Text>
       <Group grow mb='md'>
         <Button variant="default"
@@ -92,7 +92,13 @@ export const AuthCard: FC<IProps> = (props) => {
 
         <Group position="apart" mt='xl'>
           <Anchor size='xs' onClick={() => toggleType()}>
-            {type === 'login' ? "Don't have an account yet?" : "Already have an account?"}
+            {
+              type === 'login'
+                ? "Don't have an account yet?"
+                : <Center inline color="blue">
+                  <IconArrowLeft size={12} stroke={1.5} />
+                  <Box ml={5}>Back to login page</Box>
+                </Center>}
           </Anchor>
           <Button type="submit" onClick={handleSubmitButton}>  {type === 'login' ? "Login" : "Sign up"}</Button>
         </Group >
