@@ -71,7 +71,7 @@ export const AuthCard: FC<IProps> = (props) => {
 
       <Divider labelPosition="center" my='sm' label="or sign with email"></Divider>
 
-      <form onSubmit={(e) => { e.preventDefault() }}>
+      <form onSubmit={handleSubmitButton}>
         {type === 'register' && (
           <TextInput required label="Username"
             placeholder="username"
@@ -100,9 +100,9 @@ export const AuthCard: FC<IProps> = (props) => {
                   <Box ml={5}>Back to login page</Box>
                 </Center>}
           </Anchor>
-          <Button type="submit" onClick={handleSubmitButton}>  {type === 'login' ? "Login" : "Sign up"}</Button>
+          <Button type="submit">  {type === 'login' ? "Login" : "Sign up"}</Button>
         </Group >
-      </form >
+      </ form>
     </Card >
   </>
 
