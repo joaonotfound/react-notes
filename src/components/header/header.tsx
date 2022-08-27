@@ -2,6 +2,7 @@ import { Button, Header as MantineHeader, Group } from "@mantine/core"
 import { Logo } from "components"
 import { Link } from 'react-router-dom'
 import { useAppSelector } from "redux/authService"
+import { HeaderAvatar } from "./header-avatar"
 
 export const Header = () => {
     const authenticated = useAppSelector(state => state.authentication.isAuthenticated)
@@ -12,11 +13,11 @@ export const Header = () => {
             </Link>
             <Group>
                 {
-                    !authenticated && (
-                        <Link to='/login'>
+                    !authenticated
+                        ? <Link to='/login'>
                             <Button variant='light'> Log-in </Button>
                         </Link>
-                    )
+                        : <HeaderAvatar />
                 }
             </Group>
         </Group>
