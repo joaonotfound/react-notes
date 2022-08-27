@@ -5,34 +5,49 @@ import { User } from "interfaces/user-interface"
 import { useState, FC } from "react"
 import { FcGoogle } from 'react-icons/fc'
 import { MdAlternateEmail } from 'react-icons/md'
+import { AuthErrorsCodes } from "adapters"
 
 interface IProps {
   onAuthentication?: (user: User) => void
 }
 
 export const AuthCard: FC<IProps> = (props) => {
-  const userAuth = new UserAuthentication()
-
   const [type, toggleType] = useToggle(['login', 'register']);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState("")
 
-  const handleSubmitButton = () => {
-    if (type === 'register') {
-      userAuth.createUserWithEmailAndPassword(username, email, password).then(user => {
-        props.onAuthentication?.(user!)
-      })
-    } else {
-      userAuth.signInWithEmailAndPassword(email, password).then(user => {
-        props.onAuthentication?.(user!)
-      })
+  const userAuth = new UserAuthentication(props.onAuthentication!, setError)
+
+  const catchPasswordErrors = (errorMessage: string): string | null => {
+    switch (errorMessage) {
+      case AuthErrorsCodes.WeakPassword:
+        return "Weak password, at least 6 character"
+      case AuthErrorsCodes.WrongPassword:
+        return "Wrong password"
+      default:
+        return null
     }
   }
-  const signUpWithGoogle = () => {
-    userAuth.signInWithGoogle().then(user => {
-      props.onAuthentication?.(user!)
-    })
+  const catchEmailErrors = (errorMessage: string): string | null => {
+    switch (errorMessage) {
+      case AuthErrorsCodes.EmailAreadyInUse:
+        return "E-mail already in use"
+      case AuthErrorsCodes.InvaildEmail:
+        return "Invalid e-mail"
+      case AuthErrorsCodes.UserNotFound:
+        return "User not found"
+      default:
+        return null
+    }
+  }
+  const handleSubmitButton = () => {
+    if (type === "register") {
+      userAuth.createUserWithEmailAndPassword(username, email, password)
+    } else {
+      userAuth.signInWithEmailAndPassword(email, password)
+    }
   }
   return <>
     <Card withBorder
@@ -48,12 +63,15 @@ export const AuthCard: FC<IProps> = (props) => {
         type === "register" ? "Welcome!" : "Welcome back!"
       }</Text>
       <Group grow mb='md'>
-        <Button variant="default" radius='lg' leftIcon={<FcGoogle />} onClick={signUpWithGoogle}> Sign in with google </Button>
+        <Button variant="default"
+          radius='lg' leftIcon={<FcGoogle />}
+          onClick={userAuth.signInWithGoogle}>
+          Sign in with google </Button>
       </Group>
 
       <Divider labelPosition="center" my='sm' label="or sign with email"></Divider>
 
-      <form onSubmit={() => { }}>
+      <form onSubmit={(e) => { e.preventDefault() }}>
         {type === 'register' && (
           <TextInput required label="Username"
             placeholder="username"
@@ -64,18 +82,19 @@ export const AuthCard: FC<IProps> = (props) => {
           rightSection={<MdAlternateEmail />}
           placeholder="your-email@email.com"
           onChange={(e) => setEmail(e.target.value)}
+          error={catchEmailErrors(error)}
         />
         <PasswordInput required label='Password'
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
+          error={catchPasswordErrors(error)}
         />
-
 
         <Group position="apart" mt='xl'>
           <Anchor size='xs' onClick={() => toggleType()}>
             {type === 'login' ? "Don't have an account yet?" : "Already have an account?"}
           </Anchor>
-          <Button onClick={handleSubmitButton}>  {type === 'login' ? "Login" : "Sign up"}</Button>
+          <Button type="submit" onClick={handleSubmitButton}>  {type === 'login' ? "Login" : "Sign up"}</Button>
         </Group >
       </form >
     </Card >

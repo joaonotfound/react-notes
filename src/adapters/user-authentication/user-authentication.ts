@@ -14,6 +14,11 @@ export class UserAuthentication {
     private readonly auth = getAuth(this.app)
     private readonly db = getFirestore(this.app)
 
+    constructor(
+        private readonly onAuthentication: (user: User) => void,
+        private readonly onErrors?: (error: string) => void
+    ) { }
+
     private async addUserToDatabase(user: User) {
         await addDoc(collection(this.db, 'users'), {
             uid: user.uid,
@@ -43,19 +48,19 @@ export class UserAuthentication {
                     email: email
                 }
                 await this.addUserToDatabase(new_user)
-                return Promise.resolve(new_user)
+                this.onAuthentication(new_user)
             }
 
-        } catch (err) {
-            return Promise.reject(err)
+        } catch (err: any) {
+            this.onErrors?.(err.message)
         }
     }
     async signInWithEmailAndPassword(email: string, password: string) {
         try {
             const user = await signInWithEmailAndPassword(this.auth, email, password)
-            return Promise.resolve(this.adaptGoogleUserToUser(user))
-        } catch (err) {
-            return Promise.reject(err)
+            this.onAuthentication?.(this.adaptGoogleUserToUser(user))
+        } catch (err: any) {
+            this.onErrors?.(err.message)
         }
     }
     async signInWithGoogle() {
@@ -73,11 +78,11 @@ export class UserAuthentication {
             }
             if (docs.docs.length === 0) {
                 await this.addUserToDatabase(app_user)
-                return Promise.resolve(app_user)
+                this.onAuthentication(app_user)
             }
-            return Promise.resolve(app_user)
-        } catch (err) {
-            return Promise.reject(err)
+            this.onAuthentication(app_user)
+        } catch (err: any) {
+            this.onErrors?.(err.message)
         }
     }
 }
