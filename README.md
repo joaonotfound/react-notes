@@ -1,4 +1,4 @@
-# Notes applicat
+# Notes application
 
 A free and open-source notes website application made using Firebase.
 
