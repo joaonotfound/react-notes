@@ -28,6 +28,7 @@
 		"experimentalDecorators": true,
 		"downlevelIteration": true,
 		"declaration": true,
+		"esModuleInterop": true,
 
 		"pretty": true
 	},
