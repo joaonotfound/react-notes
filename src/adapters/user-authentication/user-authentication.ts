@@ -3,7 +3,8 @@ import {
     getAuth, GoogleAuthProvider,
     signInWithPopup, signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
-    UserCredential
+    UserCredential,
+    Persistence
 } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
 import { getFirestore, query, where, collection, getDocs, addDoc } from 'firebase/firestore'
@@ -17,8 +18,13 @@ export class UserAuthentication {
     constructor(
         private readonly onAuthentication: (user: User) => void,
         private readonly onErrors?: (error: string) => void
-    ) { }
-
+    ) {}
+    public async setPersistent(persistence: Persistence){
+        await this.auth.setPersistence(persistence)        
+    }
+    public async currentUser(){
+        return this.auth.currentUser;
+    }
     private async addUserToDatabase(user: User) {
         await addDoc(collection(this.db, 'users'), {
             uid: user.uid,
