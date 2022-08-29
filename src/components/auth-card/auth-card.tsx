@@ -66,7 +66,7 @@ export const AuthCard: FC<IProps> = (props) => {
       <Group grow mb='md'>
         <Button variant="default"
           radius='lg' leftIcon={<FcGoogle />}
-          onClick={userAuth.signInWithGoogle}>
+          onClick={() => userAuth.signInWithGoogle()}>
           Sign in with google </Button>
       </Group>
 
