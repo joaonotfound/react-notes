@@ -1,4 +1,4 @@
-import firebaseSettings from './firebase-settings.json'
+import firebaseSettings from 'firebase-settings/firebase-settings.json'
 import {
     getAuth, GoogleAuthProvider,
     signInWithPopup, signInWithEmailAndPassword,
