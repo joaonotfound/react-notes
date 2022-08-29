@@ -1,4 +1,7 @@
+import * as express from "express";
 
-export function sayHelloWorld(world: string) {
-  return `Hello ${world}`;
-}
+const app: express.Application = express();
+
+app.listen('5000', () => {
+  console.log("running on port 5000")
+})

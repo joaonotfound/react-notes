@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "es5",
+		"target": "ES2022",
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"lib": [
@@ -8,8 +8,8 @@
 		],
 
 		"rootDir": "src",
-		"outDir": "lib",
-
+		"outDir": "dist",
+		"baseUrl": "src",
 		"strict": true,
 		"alwaysStrict": true,
 		"strictFunctionTypes": true,
