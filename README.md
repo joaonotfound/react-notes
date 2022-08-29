@@ -12,7 +12,9 @@ I still didn't decide its name and either its logo.
 
 # How to run
 
+
 You must put your firebase's sdk file in src/firebase-settings/ to be able to run this project..
+Also you need to put your admin firebase sdk file into backend/admin-firebase-sdk folder 
 
 Execute: 
 ```
