@@ -24,3 +24,7 @@ yarn-error.log*
 
 **/*package-lock.json
 **/*admin-firebase-sdk
+
+#teste
+
+**/*.py
