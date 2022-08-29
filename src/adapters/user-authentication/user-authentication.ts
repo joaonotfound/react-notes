@@ -7,7 +7,7 @@ import {
     Persistence
 } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
-import { getFirestore, query, where, collection, getDocs, addDoc } from 'firebase/firestore'
+import { getFirestore, collection, addDoc } from 'firebase/firestore'
 import { User } from 'interfaces/user-interface'
 
 export class UserAuthentication {
@@ -45,17 +45,12 @@ export class UserAuthentication {
         try {
             const res = await createUserWithEmailAndPassword(this.auth, email, password)
             const user = res.user
-            const q = query(collection(this.db, 'users'), where('uid', '==', user.uid))
-            const docs = await getDocs(q)
-            if (docs.docs.length === 0) {
-                const new_user = {
-                    uid: user.uid,
-                    username: username,
-                    email: email
-                }
-                await this.addUserToDatabase(new_user)
-                this.onAuthentication(new_user)
+            const new_user: User = {
+                uid: user.uid,
+                username: username,
+                email: email
             }
+            this.onAuthentication(new_user)
 
         } catch (err: any) {
             this.onErrors?.(err.message)
