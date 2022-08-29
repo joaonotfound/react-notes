@@ -7,6 +7,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { MdAlternateEmail } from 'react-icons/md'
 import { AuthErrorsCodes } from "adapters"
 import { IconArrowLeft } from '@tabler/icons'
+import { browserLocalPersistence } from "firebase/auth"
 interface IProps {
   onAuthentication?: (user: User) => void
 }
@@ -19,7 +20,8 @@ export const AuthCard: FC<IProps> = (props) => {
   const [error, setError] = useState("")
 
   const userAuth = new UserAuthentication(props.onAuthentication!, setError)
-
+  userAuth.setPersistent(browserLocalPersistence)
+  
   const catchPasswordErrors = (errorMessage: string): string | null => {
     switch (errorMessage) {
       case AuthErrorsCodes.WeakPassword:
