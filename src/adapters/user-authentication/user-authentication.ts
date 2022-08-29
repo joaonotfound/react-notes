@@ -74,17 +74,11 @@ export class UserAuthentication {
             const googleProvider = new GoogleAuthProvider();
             const res = await signInWithPopup(this.auth, googleProvider)
             let user = res.user
-            const q = query(collection(this.db, 'users'), where("uid", "==", user.uid))
-            const docs = await getDocs(q);
             const app_user: User = {
                 uid: user.uid,
                 username: user.displayName != null ? user.displayName : "NOUSER",
                 authProvider: "google",
                 email: user.email!
-            }
-            if (docs.docs.length === 0) {
-                await this.addUserToDatabase(app_user)
-                this.onAuthentication(app_user)
             }
             this.onAuthentication(app_user)
         } catch (err: any) {
