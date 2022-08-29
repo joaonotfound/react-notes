@@ -1,4 +1,4 @@
-import firebaseSettings from 'firebase-settings/firebase-settings.json'
+import { firebaseConfig } from 'firebase-settings/firebase-settings'
 import {
     getAuth, GoogleAuthProvider,
     signInWithPopup, signInWithEmailAndPassword,
@@ -10,7 +10,7 @@ import { getFirestore, query, where, collection, getDocs, addDoc } from 'firebas
 import { User } from 'interfaces/user-interface'
 
 export class UserAuthentication {
-    private readonly app = initializeApp(firebaseSettings)
+    private readonly app = initializeApp(firebaseConfig)
     private readonly auth = getAuth(this.app)
     private readonly db = getFirestore(this.app)
 
