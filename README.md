@@ -11,7 +11,8 @@ I still didn't decide its name and either its logo.
 **This site is not usable yet.**
 
 # How to run
- 
+
+You must put your firebase's sdk file in src/firebase-settings/ to be able to run this project..
 
 Execute: 
 ```
