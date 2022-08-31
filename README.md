@@ -38,16 +38,9 @@ e.g.:
 ```backend/src/admin-firebase-sdk/credentials.ts```
 ```
 export const credentials = {
-  type: "",
   projectId: "",
-  private_key_id: "",
   privateKey: "",
-  clientEmail: "",
-  client_id: "",
-  auth_uri: "",
-  token_uri: "",
-  auth_provider_x509_cert_url: "",
-  client_x509_cert_url: ""
+  clientEmail: ""
 }
 ```
 
