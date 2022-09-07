@@ -1,5 +1,5 @@
 import { TokenDatabaseModel } from "../models/token-database.model";
-import { credentials } from "@/admin-firebase-sdk/credentials";
+import { credentials } from "../../admin-firebase-sdk/credentials";
 import admin from 'firebase-admin'
 
 export class TokenDatabase implements TokenDatabaseModel {
@@ -12,10 +12,11 @@ export class TokenDatabase implements TokenDatabaseModel {
   }
 
   public async getUIDBy(token: string): Promise<String> {
-    const verifiedToken = await this.auth.verifyIdToken(token);
-    if (verifiedToken.uid == null) {
+    const user = await this.auth.verifyIdToken(token)
+      .catch(_ => Promise.reject("Token invalid."));
+    if (user.uid == null) {
       Promise.reject("Token invalid.")
     }
-    return verifiedToken.uid;
+    return user.uid;
   }
 }
