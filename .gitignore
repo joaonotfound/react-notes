@@ -23,8 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 **/*package-lock.json
-**/*admin-firebase-sdk
+**/*credentials*
+
 
 #teste
-
 **/*.py
