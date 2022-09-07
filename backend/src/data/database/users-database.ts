@@ -13,13 +13,13 @@ export class UsersDatabase implements UserDatabaseModel {
     const userDoc = this.getUsersCollection().doc(uid)
     const user = await userDoc.get();
     const userData = user.data();
-
     if (!user.exists) {
       Promise.reject("User doesn't exists.")
     }
     return {
       name: userData?.name,
-      email: userData?.email
+      email: userData?.email,
+      finishedSignUp: userData?.finishedSignUp
     }
 
   }
