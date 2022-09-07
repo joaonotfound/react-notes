@@ -1,10 +1,9 @@
 import admin from 'firebase-admin'
 
+import { User, CreateUserInterface, CreatedUserInterface } from '@/interfaces';
 import { credentials } from "../../admin-firebase-sdk/credentials"
-import { User } from '@/interface/users-interface';
 import { UserDatabaseModel } from '../models/user-database-model';
-import { CreateUserInterface } from '@/interface/create-user-interface';
-import { CreatedUserInterface } from '@/interface/created-user-interface';
+
 export class UsersDatabase implements UserDatabaseModel {
   private readonly store;
   constructor() {
