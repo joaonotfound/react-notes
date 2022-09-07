@@ -1,10 +1,10 @@
-import { DatabaseModel } from '../database-interface';
+import { DatabaseModel } from '../database-model';
 import admin from 'firebase-admin'
 import { credentials } from "../../admin-firebase-sdk/credentials"
 
-export class FirestoreAdmin extends DatabaseModel{
+export class FirestoreAdmin extends DatabaseModel {
   private readonly auth;
-  constructor(){
+  constructor() {
     super()
     admin.initializeApp({
       credential: admin.credential.cert(credentials)
@@ -12,7 +12,7 @@ export class FirestoreAdmin extends DatabaseModel{
     this.auth = admin.auth()
   }
 
-  public async verifyToken(idToken: string): Promise<Boolean>{
+  public async verifyToken(idToken: string): Promise<Boolean> {
     const userVerified = await this.auth.verifyIdToken(idToken);
     return userVerified.uid != null;
   }
