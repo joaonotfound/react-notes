@@ -1,15 +1,11 @@
 import admin from 'firebase-admin'
 
 import { User, CreateUserInterface, CreatedUserInterface } from '@/interfaces';
-import { credentials } from "../../admin-firebase-sdk/credentials"
 import { UserDatabaseModel } from '../models/user-database-model';
 
 export class UsersDatabase implements UserDatabaseModel {
   private readonly store;
   constructor() {
-    admin.initializeApp({
-      credential: admin.credential.cert(credentials)
-    });
     this.store = admin.firestore();
   }
 
