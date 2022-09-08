@@ -1,6 +1,6 @@
 # Notes application
 
-A free and open-source notes website application made using Firebase, React, Typescript and Express.
+A free and open-source notes website application made using Firebase, React, Redux, Typescript and Express.
 
 It's purpouse is to be a simple alternative to the obsidian and notion. 
 
