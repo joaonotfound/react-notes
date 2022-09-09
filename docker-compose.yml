@@ -1,0 +1,10 @@
+services:
+  notes-backend:
+    container_name: backend-notes
+    image: backend-notes
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "60:5000"
