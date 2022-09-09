@@ -32,7 +32,7 @@
     "build": "npx react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build-container": "npm run build && npx serve -s build"
+    "build-container": "npm run build && npx serve -s build -l tcp://0.0.0.0"
   },
   "eslintConfig": {
     "extends": [
