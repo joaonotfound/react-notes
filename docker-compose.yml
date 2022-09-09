@@ -8,3 +8,15 @@ services:
       dockerfile: Dockerfile
     ports:
       - "60:5000"
+  notes-frontend:
+    container_name: frontend-notes
+    image: frontend-notes
+    restart: always
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "7000:3000"
+    depends_on:
+      - notes-backend
+
