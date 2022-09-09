@@ -8,6 +8,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "60:5000"
+    volumes:
+      - "./backend/src:/app/src"
+
   notes-frontend:
     container_name: frontend-notes
     image: frontend-notes

@@ -1,9 +1,12 @@
-FROM node:alpine
+FROM node:18-alpine
 
 WORKDIR /app
 
-COPY . .
+COPY package.json tsconfig.json ./
+
+# Create empty src. 
+RUN mkdir src && touch src/index.ts
 
 RUN npm install
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "build-container"]
