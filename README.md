@@ -4,7 +4,7 @@ A free and open-source notes website application made using Firebase, React, Red
 
 It's purpouse is to be a simple alternative to the obsidian and notion. 
 
-you may checkout the site deployed here: [notes](https://joaonotfound.ddns.net) (not the latest version)
+you may checkout the site deployed here: [notes](https://notes-app-e7797.web.app) 
 
 I still didn't decide its name and either its logo.
 
