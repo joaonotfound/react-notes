@@ -1,4 +1,4 @@
-import { firebaseConfig } from 'firebase-settings/firebase-settings'
+import { firebaseConfig } from 'firebase-config/credentials'
 import {
     getAuth, GoogleAuthProvider,
     signInWithPopup, signInWithEmailAndPassword,
@@ -18,11 +18,11 @@ export class UserAuthentication {
     constructor(
         private readonly onAuthentication: (user: User) => void,
         private readonly onErrors?: (error: string) => void
-    ) {}
-    public async setPersistent(persistence: Persistence){
-        await this.auth.setPersistence(persistence)        
+    ) { }
+    public async setPersistent(persistence: Persistence) {
+        await this.auth.setPersistence(persistence)
     }
-    public async currentUser(){
+    public async currentUser() {
         return this.auth.currentUser;
     }
     private async addUserToDatabase(user: User) {

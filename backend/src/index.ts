@@ -5,7 +5,7 @@ import { UsersApi } from "./api/users-api";
 import { TokenDatabase } from "./data/database/tokens-database";
 import { UsersDatabase } from "./data/database/users-database";
 import admin from 'firebase-admin'
-import { credentials } from './admin-firebase-sdk/credentials'
+import { credentials } from 'firebase-config/credentials'
 
 admin.initializeApp({
   credential: admin.credential.cert(credentials)
