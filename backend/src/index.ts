@@ -5,7 +5,7 @@ import { UsersApi } from "./api/users-api";
 import { TokenDatabase } from "./data/database/tokens-database";
 import { UsersDatabase } from "./data/database/users-database";
 import admin from 'firebase-admin'
-import { credentials } from 'firebase-config/credentials'
+import { credentials } from './firebase-config/credentials'
 
 admin.initializeApp({
   credential: admin.credential.cert(credentials)
@@ -23,6 +23,6 @@ app.use(express.json())
 web.register(app, tokenAPI)
 web.register(app, userApi)
 
-app.listen(5000, () => {
+app.listen(5000, '0.0.0.0', () => {
   console.log('running on localhost:5000')
 })
