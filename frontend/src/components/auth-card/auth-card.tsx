@@ -4,13 +4,12 @@ import { useState, FC } from "react"
 import { FcGoogle } from 'react-icons/fc'
 import { MdAlternateEmail } from 'react-icons/md'
 import { IconArrowLeft } from '@tabler/icons'
-import { browserLocalPersistence } from "firebase/auth"
 
-import { UserAuthentication, AuthErrorsCodes } from "backend/adapters"
+import { userAuth, AuthErrorsCodes } from "backend/adapters"
 import { UserBackend } from "backend/interfaces"
 
 interface IProps {
-  onAuthentication?: (user: UserBackend) => void
+  onAuthentication: (user: UserBackend) => void
 }
 
 export const AuthCard: FC<IProps> = (props) => {
@@ -19,9 +18,6 @@ export const AuthCard: FC<IProps> = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState("")
-
-  const userAuth = new UserAuthentication(props.onAuthentication!, setError)
-  userAuth.setPersistent(browserLocalPersistence)
 
   const catchPasswordErrors = (errorMessage: string): string | null => {
     switch (errorMessage) {
@@ -45,13 +41,19 @@ export const AuthCard: FC<IProps> = (props) => {
         return null
     }
   }
-  const handleSubmitButton = (e: any) => {
-    e.preventDefault?.()
+  const googleSigninPopup = async () => {
+    const res = await userAuth.signInWithGoogle();
+    props.onAuthentication(res)
+  }
+  const handleSubmitButton = async (event: any) => {
+    event.preventDefault?.()
+    let user;
     if (type === "register") {
-      userAuth.createUserWithEmailAndPassword(username, email, password)
+      user = await userAuth.createUserWithEmailAndPassword(username, email, password)
     } else {
-      userAuth.signInWithEmailAndPassword(email, password)
+      user = await userAuth.signInWithEmailAndPassword(email, password)
     }
+    props.onAuthentication(user)
   }
   return <>
     <Card withBorder
@@ -69,7 +71,7 @@ export const AuthCard: FC<IProps> = (props) => {
       <Group grow mb='md'>
         <Button variant="default"
           radius='lg' leftIcon={<FcGoogle />}
-          onClick={() => userAuth.signInWithGoogle()}>
+          onClick={() => googleSigninPopup()}>
           Sign in with google </Button>
       </Group>
 
