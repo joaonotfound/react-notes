@@ -1,5 +1,5 @@
 
 
 export abstract class TokenAuthModel {
-  public abstract isAuthenticated(): Promise<Boolean>
+  public abstract isAuthenticated(): Promise<string>
 }

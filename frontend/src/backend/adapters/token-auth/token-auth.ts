@@ -6,7 +6,7 @@ import { browserLocalPersistence } from "firebase/auth";
 
 class TokenAuth implements TokenAuthModel {
   constructor(private readonly axios: Axios) { }
-  public async isAuthenticated(): Promise<Boolean> {
+  public async isAuthenticated(): Promise<string> {
     await appAuth.setPersistence(browserLocalPersistence)
     const currentUser = appAuth.currentUser
     const token = await currentUser?.getIdToken();
@@ -16,7 +16,7 @@ class TokenAuth implements TokenAuthModel {
     return await this.axios.get('/token/verify', {
       params: { token }
     })
-      .then(res => Promise.resolve(true))
+      .then(res => Promise.resolve(res.data))
       .catch(_ => Promise.reject(false))
   }
 }
