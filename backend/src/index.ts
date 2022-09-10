@@ -6,12 +6,15 @@ import { TokenDatabase } from "./data/database/tokens-database";
 import { UsersDatabase } from "./data/database/users-database";
 import admin from 'firebase-admin'
 import { credentials } from './firebase-config/credentials'
+import cors from 'cors'
 
 admin.initializeApp({
   credential: admin.credential.cert(credentials)
 });
 
 const app: express.Application = express();
+
+app.use(cors())
 
 const userDatabase = new UsersDatabase();
 const userApi = new UsersApi(userDatabase);
