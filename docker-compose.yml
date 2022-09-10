@@ -10,25 +10,26 @@ services:
       - "60:5000"
     volumes:
       - "./backend/src:/app/src"
-    networks: 
+    networks:
       - application-network
 
   notes-frontend:
     container_name: frontend-notes
     image: frontend-notes
     restart: always
-    build: 
+    build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "7000:3000"
     volumes:
       - "./frontend/build:/app/build"
-    networks: 
+      - "./frontend/src:/app/src"
+    networks:
       - application-network
     depends_on:
       - notes-backend
-    
+
 networks:
-  application-network: 
+  application-network:
     driver: bridge
