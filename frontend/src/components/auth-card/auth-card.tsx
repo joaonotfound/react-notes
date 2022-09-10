@@ -1,15 +1,16 @@
 import { Card, Box, Center, PasswordInput, Text, TextInput, Button, Group, Anchor, Divider } from "@mantine/core"
 import { useToggle } from "@mantine/hooks"
-import { UserAuthentication } from "adapters"
-import { User } from "interfaces/user-interface"
 import { useState, FC } from "react"
 import { FcGoogle } from 'react-icons/fc'
 import { MdAlternateEmail } from 'react-icons/md'
-import { AuthErrorsCodes } from "adapters"
 import { IconArrowLeft } from '@tabler/icons'
 import { browserLocalPersistence } from "firebase/auth"
+
+import { UserAuthentication, AuthErrorsCodes } from "backend/adapters"
+import { UserBackend } from "backend/interfaces"
+
 interface IProps {
-  onAuthentication?: (user: User) => void
+  onAuthentication?: (user: UserBackend) => void
 }
 
 export const AuthCard: FC<IProps> = (props) => {
@@ -21,7 +22,7 @@ export const AuthCard: FC<IProps> = (props) => {
 
   const userAuth = new UserAuthentication(props.onAuthentication!, setError)
   userAuth.setPersistent(browserLocalPersistence)
-  
+
   const catchPasswordErrors = (errorMessage: string): string | null => {
     switch (errorMessage) {
       case AuthErrorsCodes.WeakPassword:

@@ -1,6 +1,6 @@
-import { User } from "interfaces/user-interface";
+import { UserBackend } from "backend/interfaces"
 
 export interface IAuth {
     isAuthenticated: boolean,
-    user?: User
+    user?: UserBackend
 }

@@ -1,7 +1,7 @@
-import { TokenAuthModel } from "adapters/models/token-auth-model";
+import { TokenAuthModel } from "backend/models/token-auth-model";
 import { Axios } from "axios";
-import { backendAPI } from "external/backend-api";
-import { UserAuthentication } from "adapters/user-authentication/user-authentication";
+import { backendAPI } from "backend/backend-api";
+import { UserAuthentication } from "../user-authentication/user-authentication";
 import { browserLocalPersistence } from "firebase/auth";
 
 class TokenAuth implements TokenAuthModel {

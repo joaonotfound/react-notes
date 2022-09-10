@@ -1,13 +1,13 @@
 import { AuthCard } from "components"
 import { Center } from "@mantine/core"
-import { User } from "interfaces/user-interface"
+import { UserBackend } from "backend/interfaces"
 import { setAuthValue, setUserValue, useAppDispatch } from "redux/authService"
 import { useNavigate } from "react-router-dom"
 
 export const AuthPage = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const onAuthentication = (user: User) => {
+  const onAuthentication = (user: UserBackend) => {
     dispatch(setAuthValue(true))
     dispatch(setUserValue(user))
     navigate('/')

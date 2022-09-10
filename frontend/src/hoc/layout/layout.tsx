@@ -3,7 +3,7 @@ import { FeedPage } from "pages/feed/feed-page"
 import { HomePage } from "pages/homepage/homepage"
 import { Route, Routes } from "react-router-dom"
 import { setAuthValue, useAppSelector } from 'redux/authService'
-import { tokenAuth } from 'adapters/token-auth/token-auth'
+import { tokenAuth } from "backend/adapters"
 import { useAppDispatch } from "redux/authService"
 
 export const Layout = () => {

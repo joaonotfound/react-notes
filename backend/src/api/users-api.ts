@@ -8,6 +8,10 @@ export class UsersApi {
   constructor(
     private readonly usersDatabase: UserDatabaseModel
   ) { }
+  @web.get('/test')
+  async testUser(_: Request, res: Response) {
+    res.status(200).send('TEsting')
+  }
   @web.get('/get-user')
   async getUsersBy(req: Request, res: Response) {
     const uid: string = req.query.uid as string;
