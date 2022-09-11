@@ -1,8 +1,9 @@
+
 import { Avatar, Menu } from "@mantine/core"
 import { IconSettings } from '@tabler/icons'
 import { useAppSelector } from "redux/authService"
 export const HeaderAvatar = () => {
-  const username = useAppSelector(state => state.authentication.user?.username)
+  const username = useAppSelector(state => state.authentication.user?.name)
   return <Menu
     shadow="sm"
     radius={0}

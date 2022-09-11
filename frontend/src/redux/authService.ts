@@ -3,14 +3,13 @@ import { AnyAction, configureStore } from "@reduxjs/toolkit"
 import AuthStore from 'redux/store';
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux"
 import { ThunkAction } from "@reduxjs/toolkit";
-import { UserBackend } from "backend/interfaces";
+import { PublicUser } from "backend/interfaces/public-user-interface";
 
 export const Store = configureStore({
     reducer: {
         authentication: AuthStore.reducer
     }
 })
-
 type RootState = ReturnType<typeof Store.getState>
 type AppDispatch = typeof Store.dispatch
 
@@ -25,7 +24,7 @@ export const setAuthValue = (isAuthenticated: boolean): ThunkAction<void, RootSt
     }
 }
 
-export const setUserValue = (user: UserBackend) => {
+export const setUserValue = (user: PublicUser) => {
     return (dispatch: any, _: any) => {
         dispatch(actions.setUser(user))
     }

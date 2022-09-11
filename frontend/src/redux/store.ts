@@ -1,7 +1,7 @@
 
 import { IAuth } from './actionTypes'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { UserBackend } from 'backend/interfaces'
+import { PublicUser } from 'backend/interfaces/public-user-interface'
 
 const initialState: IAuth = {
     isAuthenticated: false
@@ -14,7 +14,7 @@ const AuthStore = createSlice({
         setAuth(state, action: PayloadAction<IAuth>) {
             state.isAuthenticated = action.payload.isAuthenticated
         },
-        setUser(state, action: PayloadAction<UserBackend>) {
+        setUser(state, action: PayloadAction<PublicUser>) {
             state.user = action.payload
         }
 

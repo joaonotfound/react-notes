@@ -1,6 +1,6 @@
-import { UserBackend } from "backend/interfaces"
+import { PublicUser } from "backend/interfaces/public-user-interface"
 
 export interface IAuth {
     isAuthenticated: boolean,
-    user?: UserBackend
+    user?: PublicUser
 }

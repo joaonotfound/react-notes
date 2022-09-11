@@ -1,5 +1,6 @@
 
-
+import { useAppSelector } from "redux/authService"
 export const FeedPage = () => {
-  return <p>Feed page</p>
+  const username = useAppSelector(state => state.authentication.user?.name)
+  return <p>Welcome back @{username}</p>
 }
