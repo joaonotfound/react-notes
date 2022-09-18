@@ -1,7 +1,9 @@
 
 import { Avatar, Menu } from "@mantine/core"
-import { IconSettings } from '@tabler/icons'
+import { IconSettings, IconLogout } from '@tabler/icons'
 import { useAppSelector } from "redux/authService"
+import { userAuth } from "backend/adapters"
+
 export const HeaderAvatar = () => {
   const username = useAppSelector(state => state.authentication.user?.name)
   return <Menu
@@ -14,6 +16,7 @@ export const HeaderAvatar = () => {
     <Menu.Dropdown>
       <Menu.Label>Config</Menu.Label>
       <Menu.Item icon={<IconSettings />}>Settings</Menu.Item>
+      <Menu.Item icon={<IconLogout />} onClick={userAuth.logout}>Log out</Menu.Item>
     </Menu.Dropdown >
   </Menu >
 }

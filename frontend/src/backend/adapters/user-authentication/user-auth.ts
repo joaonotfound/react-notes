@@ -7,6 +7,7 @@ import {
 } from 'firebase/auth'
 import { UserBackend } from 'backend/interfaces'
 import { appAuth } from 'backend/firebase-config/auth'
+import { setAuthValue, setUserValue } from 'redux/authService'
 
 class UserAuthentication {
     constructor(private readonly auth: Auth) { }
@@ -28,7 +29,10 @@ class UserAuthentication {
             email
         }
     }
-
+    async logout() {
+        await this.auth.signOut();
+        setAuthValue(false)
+    }
     async signInWithEmailAndPassword(email: string, password: string): Promise<UserBackend> {
         const user = await signInWithEmailAndPassword(this.auth, email, password)
             .catch(err => Promise.reject(err.message))
