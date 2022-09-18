@@ -5,8 +5,9 @@ import { FcGoogle } from 'react-icons/fc'
 import { MdAlternateEmail } from 'react-icons/md'
 import { IconArrowLeft } from '@tabler/icons'
 
-import { userAuth, AuthErrorsCodes } from "backend/adapters"
+import { userAuth } from "backend/adapters"
 import { UserBackend } from "backend/interfaces"
+import { MakedupError, makeupAuthError } from 'backend/adapters/user-authentication/auth-error-codes'
 
 interface IProps {
   onAuthentication: (user: UserBackend) => void
@@ -17,43 +18,25 @@ export const AuthCard: FC<IProps> = (props) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState("")
+  const [error, setError] = useState<MakedupError>({ type: "ne" })
 
-  const catchPasswordErrors = (errorMessage: string): string | null => {
-    switch (errorMessage) {
-      case AuthErrorsCodes.WeakPassword:
-        return "Weak password, at least 6 character"
-      case AuthErrorsCodes.WrongPassword:
-        return "Wrong password"
-      default:
-        return null
-    }
-  }
-  const catchEmailErrors = (errorMessage: string): string | null => {
-    switch (errorMessage) {
-      case AuthErrorsCodes.EmailAreadyInUse:
-        return "E-mail already in use"
-      case AuthErrorsCodes.InvaildEmail:
-        return "Invalid e-mail"
-      case AuthErrorsCodes.UserNotFound:
-        return "User not found"
-      default:
-        return null
-    }
-  }
   const googleSigninPopup = async () => {
     const res = await userAuth.signInWithGoogle();
     props.onAuthentication(res)
   }
   const handleSubmitButton = async (event: any) => {
     event.preventDefault?.()
-    let user;
+    debugger
     if (type === "register") {
-      user = await userAuth.createUserWithEmailAndPassword(username, email, password)
+      const user = await userAuth.createUserWithEmailAndPassword(username, email, password)
+      props.onAuthentication(user)
     } else {
-      user = await userAuth.signInWithEmailAndPassword(email, password)
+      userAuth.signInWithEmailAndPassword(email, password)
+        .then(user => {
+          props.onAuthentication(user)
+        })
+        .catch(err => setError(makeupAuthError(err)!))
     }
-    props.onAuthentication(user)
   }
   return <>
     <Card withBorder
@@ -79,21 +62,17 @@ export const AuthCard: FC<IProps> = (props) => {
 
       <form onSubmit={handleSubmitButton}>
         {type === 'register' && (
-          <TextInput required label="Username"
-            placeholder="username"
+          <TextInput required label="Username" placeholder="username"
             onChange={(e) => setUsername(e.target.value)}
           />
         )}
-        <TextInput required label="Email"
-          rightSection={<MdAlternateEmail />}
-          placeholder="your-email@email.com"
+        <TextInput required label="Email" rightSection={<MdAlternateEmail />} placeholder="your-email@email.com"
           onChange={(e) => setEmail(e.target.value)}
-          error={catchEmailErrors(error)}
+          error={error.type === "email" ? error.message : null}
         />
-        <PasswordInput required label='Password'
-          placeholder="password"
+        <PasswordInput required label='Password' placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
-          error={catchPasswordErrors(error)}
+          error={error.type === "password" ? error.message : null}
         />
 
         <Group position="apart" mt='xl'>

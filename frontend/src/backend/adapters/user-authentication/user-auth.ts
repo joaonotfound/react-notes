@@ -31,7 +31,7 @@ class UserAuthentication {
 
     async signInWithEmailAndPassword(email: string, password: string): Promise<UserBackend> {
         const user = await signInWithEmailAndPassword(this.auth, email, password)
-            .catch(_ => Promise.reject())
+            .catch(err => Promise.reject(err.message))
         return this.adaptGoogleUserToUser(user)
     }
 
