@@ -1,7 +1,7 @@
 import { Button, Header as MantineHeader, Group } from "@mantine/core"
 import { Logo } from "components"
 import { Link } from 'react-router-dom'
-import { useAppSelector } from "redux/authService"
+import { useAppSelector } from "redux/auth-service"
 import { HeaderAvatar } from "./header-avatar"
 import { useNavigate } from "react-router-dom"
 

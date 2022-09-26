@@ -1,7 +1,7 @@
 import { AuthCard } from "components"
 import { Center } from "@mantine/core"
 import { UserBackend } from "backend/interfaces"
-import { setAuthValue, setUserValue, useAppDispatch } from "redux/authService"
+import { setAuthValue, setUserValue, useAppDispatch } from "redux/auth-service"
 import { useNavigate } from "react-router-dom"
 import { PublicUser } from "backend/interfaces/public-user-interface"
 

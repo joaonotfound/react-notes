@@ -1,8 +1,8 @@
 import { AppShell, MantineThemeOverride, MantineProvider } from "@mantine/core"
-import { Header } from "../header/header"
+import { Header } from "./header/header"
 import { Layout } from "hoc"
 import { BrowserRouter as Router } from "react-router-dom"
-import { Store } from "redux/authService"
+import { Store } from "redux/auth-service"
 import { Provider } from "react-redux"
 
 const globalTheme: MantineThemeOverride = {

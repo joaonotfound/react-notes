@@ -2,9 +2,8 @@ import { AuthPage } from "pages/auth/auth-page"
 import { FeedPage } from "pages/feed/feed-page"
 import { HomePage } from "pages/homepage/homepage"
 import { Route, Routes } from "react-router-dom"
-import { setAuthValue, setUserValue, useAppSelector } from 'redux/authService'
+import { setAuthValue, setUserValue, useAppSelector, useAppDispatch } from 'redux/auth-service'
 import { tokenAuth } from "backend/adapters"
-import { useAppDispatch } from "redux/authService"
 import { userDatabase } from "backend/adapters/user-database/user-database"
 
 export const Layout = () => {

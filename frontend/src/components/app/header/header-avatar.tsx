@@ -1,7 +1,7 @@
 
 import { Avatar, Menu } from "@mantine/core"
 import { IconSettings, IconLogout } from '@tabler/icons'
-import { useAppSelector } from "redux/authService"
+import { useAppSelector } from "redux/auth-service"
 import { userAuth } from "backend/adapters"
 
 export const HeaderAvatar = () => {

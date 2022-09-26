@@ -7,7 +7,7 @@ import {
 } from 'firebase/auth'
 import { UserBackend } from 'backend/interfaces'
 import { appAuth } from 'backend/firebase-config/auth'
-import { setAuthValue, setUserValue } from 'redux/authService'
+import { setAuthValue } from 'redux/auth-service'
 
 class UserAuthentication {
     constructor(private readonly auth: Auth) { }

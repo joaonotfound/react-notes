@@ -1,5 +1,5 @@
 
-import { IAuth } from './actionTypes'
+import { IAuth } from './action-types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { PublicUser } from 'backend/interfaces/public-user-interface'
 
